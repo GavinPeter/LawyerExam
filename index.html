@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <head><title>110司律一試線上測驗</title>
+    <head><title>司律一試線上測驗</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
-        <meta property="og:title" content="110司律一試線上測驗">
-        <meta property="og:description" content="以110司律一試考古題為基礎，提供線上題庫練習">
+        <meta property="og:title" content="司律一試線上測驗">
+        <meta property="og:description" content="以司律一試考古題為基礎，提供線上題庫練習">
         <meta property="og:type" content="website">
         
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <style>
         input[type='radio'] { transform: scale(2); }
-
+		input[type='checkbox'] { transform: scale(2); }
         </style>
     </head>
     <body>
@@ -19,7 +19,7 @@
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container-fluid">
         <div class="navbar-header">
-		<a class="navbar-brand visible-xs" href="#">110司律一試</a>
+		<a class="navbar-brand visible-xs" href="#">司律一試</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -31,7 +31,8 @@
           <ul class="nav navbar-nav">
             	<li><a href="#">110綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
 				<li><a href="#">110綜合法學(二)(民法、民事訴訟法)</a></li>
-
+				<li><a href="#">110綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>
+				<li><a href="#">110綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -68,8 +69,8 @@
                 資料來源：考選部考古題
             </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script>
         var currentIndex = 0, qa = [], total = 0;
         $(function() {
@@ -121,9 +122,9 @@
 			$.when(
 			$.get( txt+'.txt', function(data) {
 			
-				var line = data.split('\n');
+				let line = data.split('\n');
 				
-				for ( var i=0;i<line.length;i++ ){
+				for ( let i=0;i<line.length;i++ ){
 				
 					if ( line[i].indexOf('禁止使用電子計算器')!=-1 ){
 		
@@ -140,13 +141,10 @@
 								},
 								"answer":null,
 								"choice":1
-								});
-								
-								if (line[i+5]==="")
-									return false;							
+								});						
 								
 								i += 5;
-								
+			
 
 							} while (i < line.length);
 
@@ -155,17 +153,20 @@
 		
 			}, 'text'),
 			$.get( txt+'ANS.txt', function(data) {
-				var line = data.split('\n');
+					
+				let line = data.split('\r');
 				
-				var index =0;
+				let index =0, ansArray=[];
 				
-				for ( var i=0;i<line.length;i++ ){
+				for ( let i=0;i<line.length;i++ ){
 				
-					if ( line[i].indexOf('A') || line[i].indexOf('B') || line[i].indexOf('C') || line[i].indexOf('D')){
+					if ( /[A-E]/g.test(line[i]) ){
+						
+						
 						
 						if (line[i].length!=1){
-							
-							var ansArray=[];
+						
+							ansArray=[];
 							
 							qa[index].choice= 2;
 							
@@ -184,6 +185,8 @@
 						
 						index++;
 
+						if ( index == qa.length)
+							return false;
 					}
 				}//end of for loop	
 			}, 'text')
@@ -216,7 +219,7 @@
 				answers += '<label class="radio-inline"><input name="answer" class="qa-multi-options" type="checkbox" value="' + k + '" />' + ' &nbsp; ' + qa[currentIndex].options[k] + '</label><br />';
 			}
 			
-			answers += '<button id="qa-submit">送出</button>';
+			answers += '<button onclick="multichoice()">送出</button>';
 			
 		  }
 		  
@@ -233,20 +236,24 @@
             }
           });
 		  
-		   $('#qa-submit').change(function() {
+
+		  
+          $('div#qa-status').html('第 ' + (currentIndex + 1) + ' 題 / 共 ' + total + ' 題');
+        }
+		
+		function multichoice() {
+		
 			var userAns = [];
-			var checkboxes = document.getElementsByName('qa-multi-options');
+			var checkboxes = document.getElementsByName('answer');
 			
-			for(var i = 0;i< checkboxes.length;  i++ )
+			for(let i = 0;i< checkboxes.length;  i++ )
 			{
 				if(checkboxes[i].checked){  
 					userAns.push( checkboxes[i].value );
 				}
 			}
-			
-			$.each( userAns, function( key, value ) {
-				var index = $.inArray( value, qa[currentIndex].answer );
-				if( index != -1 ) {
+	
+				if( JSON.stringify(userAns)!=JSON.stringify(qa[currentIndex].answer) ) {
 					let theAns="";
 					qa[currentIndex].answer.forEach(function(value){
 						theAns +=  "<br>" + qa[currentIndex].options[value] ;
@@ -257,17 +264,10 @@
 				else{
 					$('#qa-result').html("你答對了！");
 				}
-			});
 			
-          });
-		  
-          $('div#qa-status').html('第 ' + (currentIndex + 1) + ' 題 / 共 ' + total + ' 題');
-        }
-		function isNumeric(str) {
-		if (typeof str != "string") return false // we only process strings!  
-		return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-         !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
-		}
+			
+          }
+		
         </script>
     </body>
 </html>
