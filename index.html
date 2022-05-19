@@ -32,10 +32,10 @@
 			  <li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">110 <span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<!--li><a href="#">110綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
+					<li><a href="#">110綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
 					<li><a href="#">110綜合法學(二)(民法、民事訴訟法)</a></li>
 					<li><a href="#">110綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>
-					<li><a href="#">110綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li-->
+					<li><a href="#">110綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li>
 				</ul>
 			  </li>
 			  <li class="dropdown">
@@ -232,9 +232,7 @@
 				
 					if ( /[A-E]/g.test(line[i]) ){
 						
-						
-						
-						if (line[i].length!=1){
+						if (line[i].replace(/\r/g, '').length!=1){
 						
 							ansArray=[];
 							
@@ -257,7 +255,7 @@
 						index++;
 
 						if ( index == qa.length)
-							return false;
+							return;
 					}
 				}//end of for loop	
 			}, 'text')
