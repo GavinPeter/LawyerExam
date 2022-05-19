@@ -51,6 +51,16 @@
 					<li><a href="#">109綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li-->
 				</ul>
 			  </li>
+			  <li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">108
+				<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">108綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
+					<li><a href="#">108綜合法學(二)(民法、民事訴訟法)</a></li>
+					<li><a href="#">108綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>
+					<li><a href="#">108綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li-->
+				</ul>
+			  </li>
           </ul>
 		  
         </div><!--/.nav-collapse -->
@@ -159,41 +169,68 @@
 									if ( (//g).test(line[i+1]) ){ //choice1 
 										
 										quiz = line[i];
-										
+										i++;
 									}
 									else{
 										quiz="";
-										for ( let j=0;;j++ ){										
+										for ( let j=0;j<5;j++ ){										
 											if ( (//g).test(line[i+j])){
-											 i= i+j-1;
+											 i= i+j;
 											 break;
-											}
-											
+											}		
 											quiz += line[i+j];
 										}
 									}
 
 
-										if (( (//g).test(line[i+1]) )){ //choice4 in next line
+										if (( (//g).test(line[i]) )){ //choice4 in next line
+											ch4 = line[i].slice( line[i].indexOf('')+1, line[i].length);
+											ch3 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											ch2 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											ch1 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											i++;
+										}
+										else if (( (//g).test(line[i]) )) { //choice2 in next line
+											ch2 = line[i].slice(line[i].indexOf('')+1 , line[i].length );
+											ch1 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
 											ch4 = line[i+1].slice( line[i+1].indexOf('')+1, line[i+1].length);
 											ch3 = line[i+1].slice(line[i+1].indexOf('')+1 , line[i+1].indexOf('') );
-											ch2 = line[i+1].slice(line[i+1].indexOf('')+1 , line[i+1].indexOf('') );
-											ch1 = line[i+1].slice(line[i+1].indexOf('')+1 , line[i+1].indexOf('') );
 											i=i+2;
 										}
-										else if (( (//g).test(line[i+1]) )) { //choice2 in next line
-											ch2 = line[i+1].slice(line[i+1].indexOf('')+1 , line[i+1].length );
-											ch1 = line[i+1].slice(line[i+1].indexOf('')+1 , line[i+1].indexOf('') );
-											ch4 = line[i+2].slice( line[i+2].indexOf('')+1, line[i+2].length);
-											ch3 = line[i+2].slice(line[i+2].indexOf('')+1 , line[i+2].indexOf('') );
-											i=i+3;
-										}
 										else{
-											ch1 = line[i+1].replace(//g, '');
-											ch2 = line[i+2].replace(//g, '');
-											ch3 = line[i+3].replace(//g, '');
-											ch4 = line[i+4].replace(//g, '');
-											i=i+5;
+											ch1 = line[i].slice(1, line[i].length);
+											for ( let j=1;j<5;j++ ){
+												line[i+j]= line[i+j].replace(/\r/g, '');
+												if ( line[i+j].length>0){
+													i= i+j;
+													break;
+												}		
+											//ch1 += line[i+j];
+											}
+											//console.log(line[i]);
+											ch2 = line[i].slice(1, line[i].length);
+											for ( let j=1;j<5;j++ ){
+												line[i+j]= line[i+j].replace(/\r/g, '');
+												if ( line[i+j].length>0 ){
+												 i= i+j;
+												 break;
+												}		
+											//ch2 += line[i+j];
+											}
+											
+											ch3 = line[i].slice(1, line[i].length);
+											for ( let j=1;j<5;j++ ){	
+												line[i+j]= line[i+j].replace(/\r/g, '');
+												if ( line[i+j].length>0){
+												 i= i+j;
+												 break;
+												}		
+											//ch3 += line[i+j];
+											}
+											
+											ch4 = line[i].slice(1, line[i].length);
+											i++;
+			
  										}
 								}
 								else{
@@ -232,7 +269,9 @@
 				
 					if ( /[A-E]/g.test(line[i]) ){
 						
-						if (line[i].replace(/\n/g, '').length!=1){
+						line[i] = line[i].replace(/\n/g, '')
+						
+						if (line[i].length!=1){
 						
 							ansArray=[];
 							
@@ -248,7 +287,7 @@
 							
 						}
 						else{
-						
+							
 							qa[index].answer= line[i];
 						}
 						
