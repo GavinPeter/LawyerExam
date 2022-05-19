@@ -11,15 +11,19 @@
         <style>
         input[type='radio'] { transform: scale(2); }
 		input[type='checkbox'] { transform: scale(2); }
+		
+		.row{
+			margin-top: 20px;
+		}
         </style>
     </head>
     <body>
 		
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-		<a class="navbar-brand visible-xs" href="#">司律一試</a>
+		<a class="navbar-brand" href="#">司律一試</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -30,7 +34,8 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
 			  <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">110 <span class="caret"></span></a>
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">110
+				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li><a href="#">110綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
 					<li><a href="#">110綜合法學(二)(民法、民事訴訟法)</a></li>
@@ -93,14 +98,14 @@
 		
 		//selectquiz( $(this).text() );
 
-		$("ul .dropdown-menu li:nth-child("+(Math.floor(Math.random() * $('.dropdown-menu li').length )+1)+")").addClass("active");
+		//$("ul .dropdown-menu li:nth-child("+(Math.floor(Math.random() * $('.dropdown-menu li').length )+1)+")").addClass("active");
 			
-		selectquiz( $(".nav").find(".active").text() );
+		//selectquiz( $("ul .dropdown-menu li").find(".active").text() );
 		
 		$(".nav a").on("click", function(){
 			
-			$(".nav").find(".active").removeClass("active");
-			$(this).parent().addClass("active");
+			//$("ul .dropdown-menu li").find(".active").removeClass("active");
+			//$(this).addClass("active");
 			
 			selectquiz( $(this).text() );
 		});
@@ -132,6 +137,8 @@
         })
 		
 		function selectquiz( txt ){
+		
+		$('.navbar-brand').text( txt );
 		
 		if ( txt.length <10 ){
 			//console.log("error: " +  txt );
@@ -224,7 +231,7 @@
 			}, 'text'),
 			$.get( txt+'ANS.txt', function(data) {
 					
-				let line = data.split('\n');
+				let line = data.split('\r');
 				
 				let index =0, ansArray=[];
 				
@@ -232,7 +239,7 @@
 				
 					if ( /[A-E]/g.test(line[i]) ){
 						
-						if (line[i].replace(/\r/g, '').length!=1){
+						if (line[i].replace(/\n/g, '').length!=1){
 						
 							ansArray=[];
 							
