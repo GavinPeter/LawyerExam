@@ -100,7 +100,7 @@
 			
 		//selectquiz( $("ul .dropdown-menu li").find(".active").text() );
 		
-		$(".nav a").on("click", function(){
+		$(".dropdown-menu a").on("click", function(){
 			
 			//$("ul .dropdown-menu li").find(".active").removeClass("active");
 			//$(this).addClass("active");
@@ -138,12 +138,7 @@
 		
 		$('.navbar-brand').text( txt );
 		
-		if ( txt.length <10 ){
-			//console.log("error: " +  txt );
-			return;
-		}
-		
-			txt = txt.substring(0,3)+ "/" + txt;
+			txt = txt.slice(0,3)+ "/" + txt;
 		
 		
 			qa = [];
