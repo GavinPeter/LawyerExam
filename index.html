@@ -153,7 +153,8 @@
 		
 			qa = [];
 			
-			$.when(
+			$.ajaxSettings.async = false;
+			
 			$.get( txt+'.txt', function(data) {
 			
 				let line = data.split('\n');
@@ -258,7 +259,7 @@
 					}
 				}//end of for loop	
 		
-			}, 'text'),
+			}, 'text');
 			$.get( txt+'ANS.txt', function(data) {
 					
 				let line = data.split('\r');
@@ -297,8 +298,9 @@
 							return;
 					}
 				}//end of for loop	
-			}, 'text')
-			).then(function() {
+			}, 'text');
+
+				$.ajaxSettings.async = true;
 				
 				total = qa.length;
 				
@@ -306,8 +308,6 @@
 				
 				showQuiz();
 				
-				
-			});
 			
 		}
 		
