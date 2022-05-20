@@ -61,6 +61,16 @@
 					<li><a href="#">108綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li-->
 				</ul>
 			  </li>
+			  <li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">107
+				<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">107綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
+					<li><a href="#">107綜合法學(二)(民法、民事訴訟法)</a></li>
+					<li><a href="#">107綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>
+					<li><a href="#">107綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li-->
+				</ul>
+			  </li>
           </ul>
 		  
         </div><!--/.nav-collapse -->
@@ -184,14 +194,14 @@
 									}
 
 
-										if (( (//g).test(line[i]) )){ //choice4 in next line
+										if (( (//g).test(line[i]) )){ //choice4 in  line
 											ch4 = line[i].slice( line[i].indexOf('')+1, line[i].length);
 											ch3 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
 											ch2 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
 											ch1 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
 											i++;
 										}
-										else if (( (//g).test(line[i]) )) { //choice2 in next line
+										else if (( (//g).test(line[i]) )) { //choice2 in  line
 											ch2 = line[i].slice(line[i].indexOf('')+1 , line[i].length );
 											ch1 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
 											ch4 = line[i+1].slice( line[i+1].indexOf('')+1, line[i+1].length);
@@ -208,7 +218,12 @@
 												}		
 											//ch1 += line[i+j];
 											}
-											//console.log(line[i]);
+											if ((//g).test(line[i]) ) { //choice3 in  line
+											
+												ch3 = line[i].slice(line[i].indexOf('')+1 , line[i].length );
+												ch2 = line[i].slice(1 , line[i].indexOf('') );
+											}
+											else{
 											ch2 = line[i].slice(1, line[i].length);
 											for ( let j=1;j<5;j++ ){
 												line[i+j]= line[i+j].replace(/\r/g, '');
@@ -228,9 +243,22 @@
 												}		
 											//ch3 += line[i+j];
 											}
-											
+											}
 											ch4 = line[i].slice(1, line[i].length);
-											i++;
+											for ( let j=1;j<3;j++ ){	
+												line[i+j]= line[i+j].replace(/\r/g, '');
+
+												if (  parseFloat(line[i+j].slice(0, 2))==(qa.length+2)){
+												 i= i+j;
+												 break;
+												}		
+											ch4 += line[i+j];
+											if (qa.length==3){
+												console.log( line[i+j])
+												console.log(  parseFloat(line[i+j].slice(0, 2)))
+												}
+											}
+											//i++;
 			
  										}
 								}
@@ -268,7 +296,7 @@
 				
 				for ( let i=0;i<line.length;i++ ){
 				
-					if ( /[A-E]/g.test(line[i]) ){
+					if ( /[A-E]/g.test(line[i]) || line[i]==='#'){
 						
 						line[i] = line[i].replace(/\n/g, '')
 						
@@ -297,6 +325,10 @@
 						if ( index == qa.length)
 							return;
 					}
+					else{
+						//console.log(line[i]);
+					}
+			
 				}//end of for loop	
 			}, 'text');
 
