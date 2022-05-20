@@ -71,6 +71,16 @@
 					<li><a href="#">107綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li-->
 				</ul>
 			  </li>
+			  <li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">106
+				<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">106綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
+					<li><a href="#">106綜合法學(二)(民法、民事訴訟法)</a></li>
+					<li><a href="#">106綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>
+					<li><a href="#">106綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li-->
+				</ul>
+			  </li>
           </ul>
 		  
         </div><!--/.nav-collapse -->
@@ -168,7 +178,7 @@
 			$.get( txt+'.txt', function(data) {
 			
 				let line = data.split('\n');
-				let quiz, ch1, ch2, ch3, ch4;
+				let quiz, chA, chB, chC, chD, chE;
 				for ( let i=0;i<line.length;i++ ){
 				
 					if ( line[i].indexOf('禁止使用電子計算器')!=-1 ){
@@ -195,68 +205,72 @@
 
 
 										if (( (//g).test(line[i]) )){ //choice4 in  line
-											ch4 = line[i].slice( line[i].indexOf('')+1, line[i].length);
-											ch3 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
-											ch2 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
-											ch1 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											chD = line[i].slice( line[i].indexOf('')+1, line[i].length);
+											chC = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											chB = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											chA = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
 											i++;
 										}
 										else if (( (//g).test(line[i]) )) { //choice2 in  line
-											ch2 = line[i].slice(line[i].indexOf('')+1 , line[i].length );
-											ch1 = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
-											ch4 = line[i+1].slice( line[i+1].indexOf('')+1, line[i+1].length);
-											ch3 = line[i+1].slice(line[i+1].indexOf('')+1 , line[i+1].indexOf('') );
+											chB = line[i].slice(line[i].indexOf('')+1 , line[i].length );
+											chA = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											chD = line[i+1].slice( line[i+1].indexOf('')+1, line[i+1].length);
+											chC = line[i+1].slice(line[i+1].indexOf('')+1 , line[i+1].indexOf('') );
 											i=i+2;
 										}
 										else{
-											ch1 = line[i].slice(1, line[i].length);
+											chA = line[i].slice(1, line[i].length);
 											for ( let j=1;j<5;j++ ){
-												line[i+j]= line[i+j].replace(/\r/g, '');
-												if ( line[i+j].length>0){
+												//line[i+j]= line[i+j].replace(/\r/g, '');
+												if (  line[i+j].charAt(0)===''){
 													i= i+j;
 													break;
 												}		
-											//ch1 += line[i+j];
+											chA += line[i+j];
 											}
 											if ((//g).test(line[i]) ) { //choice3 in  line
 											
-												ch3 = line[i].slice(line[i].indexOf('')+1 , line[i].length );
-												ch2 = line[i].slice(1 , line[i].indexOf('') );
+												chC = line[i].slice(line[i].indexOf('')+1 , line[i].length );
+												chB = line[i].slice(1 , line[i].indexOf('') );
 											}
 											else{
-											ch2 = line[i].slice(1, line[i].length);
-											for ( let j=1;j<5;j++ ){
-												line[i+j]= line[i+j].replace(/\r/g, '');
-												if ( line[i+j].length>0 ){
-												 i= i+j;
-												 break;
+												chB = line[i].slice(1, line[i].length);
+												for ( let j=1;j<5;j++ ){
+													//line[i+j]= line[i+j].replace(/\r/g, '');
+													if ( line[i+j].charAt(0)==='' ){
+													i= i+j;
+													break;
 												}		
-											//ch2 += line[i+j];
+												chB += line[i+j];
 											}
 											
-											ch3 = line[i].slice(1, line[i].length);
-											for ( let j=1;j<5;j++ ){	
-												line[i+j]= line[i+j].replace(/\r/g, '');
-												if ( line[i+j].length>0){
-												 i= i+j;
-												 break;
+											chC = line[i].slice(1, line[i].length);
+												for ( let j=1;j<5;j++ ){	
+												//line[i+j]= line[i+j].replace(/\r/g, '');
+												if (  line[i+j].charAt(0)===''){
+													i= i+j;
+													break;
 												}		
-											//ch3 += line[i+j];
-											}
-											}
-											ch4 = line[i].slice(1, line[i].length);
-											for ( let j=1;j<3;j++ ){	
-												line[i+j]= line[i+j].replace(/\r/g, '');
-
-												if (  parseFloat(line[i+j].slice(0, 2))==(qa.length+2)){
-												 i= i+j;
-												 break;
-												}		
-											ch4 += line[i+j];
-											if (qa.length==3){
-												console.log( line[i+j])
-												console.log(  parseFloat(line[i+j].slice(0, 2)))
+												chC += line[i+j];
 												}
+											}
+											
+											chD = line[i].slice(1, line[i].length);
+											for ( let j=1;j<3;j++ ){	
+												//line[i+j]= line[i+j].replace(/\r/g, '');
+												
+												if (  parseFloat(line[i+j].slice(0, 2))==(qa.length+2)){
+													i= i+j;
+													chE = "";
+													break;
+												}
+												if (  line[i+j].charAt(0)===''){
+													i= i+j;
+													chE = line[i].slice(1, line[i].length);
+													i++;
+													break;
+												}	
+												chD += line[i+j];
 											}
 											//i++;
 			
@@ -271,10 +285,11 @@
 								qa.push({
 								"quiz": quiz,
 								"options": {
-								"A": ch1,
-								"B": ch2,
-								"C": ch3,
-								"D": ch4
+								"A": chA,
+								"B": chB,
+								"C": chC,
+								"D": chD,
+								"E": chE
 								},
 								"answer":null,
 								"choice":1
@@ -354,12 +369,13 @@
 		  
 		  if (qa[currentIndex].choice==1){
 			for(k in qa[currentIndex].options) {
-				answers += '<label class="radio-inline"><input name="answer" class="qa-options" type="radio" value="' + k + '" />' + ' &nbsp; ' + qa[currentIndex].options[k] + '</label><br />';
+				if( qa[currentIndex].options[k].length!=0 )
+				answers += '<label class="radio-inline"><input name="answer" class="qa-options" type="radio" value="' + k + '" />' +  qa[currentIndex].options[k] + '</label><br />';
 			}
 		  }
 		  else{
 			for(k in qa[currentIndex].options) {
-				answers += '<label class="radio-inline"><input name="answer" class="qa-multi-options" type="checkbox" value="' + k + '" />' + ' &nbsp; ' + qa[currentIndex].options[k] + '</label><br />';
+				answers += '<label class="checkbox-inline"><input name="answer" class="qa-multi-options" type="checkbox" value="' + k + '" />' +  qa[currentIndex].options[k] + '</label><br />';
 			}
 			
 			answers += '<button onclick="multichoice()">送出</button>';
@@ -399,7 +415,7 @@
 				if( JSON.stringify(userAns)!=JSON.stringify(qa[currentIndex].answer) ) {
 					let theAns="";
 					qa[currentIndex].answer.forEach(function(value){
-						theAns +=  "<br>" + qa[currentIndex].options[value] ;
+						theAns +=  "<br>*" + qa[currentIndex].options[value] ;
 					});
 					
 					$('#qa-result').html("你答錯了！正確答案應該是 -> " + theAns );
