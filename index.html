@@ -31,7 +31,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-			  <li class="dropdown">
+			  <!--li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">110
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
@@ -40,47 +40,7 @@
 					<li><a href="#">110綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>
 					<li><a href="#">110綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li>
 				</ul>
-			  </li>
-			  <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">109
-				<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">109綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
-					<li><a href="#">109綜合法學(二)(民法、民事訴訟法)</a></li>
-					<li><a href="#">109綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>
-					<li><a href="#">109綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li-->
-				</ul>
-			  </li>
-			  <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">108
-				<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">108綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
-					<li><a href="#">108綜合法學(二)(民法、民事訴訟法)</a></li>
-					<li><a href="#">108綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>
-					<li><a href="#">108綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li-->
-				</ul>
-			  </li>
-			  <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">107
-				<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">107綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
-					<li><a href="#">107綜合法學(二)(民法、民事訴訟法)</a></li>
-					<li><a href="#">107綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>
-					<li><a href="#">107綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li-->
-				</ul>
-			  </li>
-			  <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">106
-				<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">106綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
-					<li><a href="#">106綜合法學(二)(民法、民事訴訟法)</a></li>
-					<li><a href="#">106綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>
-					<li><a href="#">106綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li-->
-				</ul>
-			  </li>
+			  </li-->
           </ul>
 		  
         </div><!--/.nav-collapse -->
@@ -122,7 +82,19 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script>
         var currentIndex = 0, qa = [], total = 0;
+		let menu ="";
         $(function() {
+		for (let yr=110;yr>99;yr--){
+			menu += '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' +
+					 yr+ '<span class="caret"></span></a>'+
+					'<ul class="dropdown-menu">'+
+					'<li><a href="#">'+yr+'綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>'+
+					'<li><a href="#">'+yr+'綜合法學(二)(民法、民事訴訟法)</a></li>'+
+					'<li><a href="#">'+yr+'綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>'+
+					'<li><a href="#">'+yr+'綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li>'+
+					'</ul></li>';
+		}
+		$(".navbar-nav").html(menu);
 		
 		//selectquiz( $(this).text() );
 
@@ -381,10 +353,11 @@
 		  }
 		  else{
 			for(k in qa[currentIndex].options) {
+				if( qa[currentIndex].options[k].length!=0 )
 				answers += '<label class="checkbox-inline"><input name="answer" class="qa-multi-options" type="checkbox" value="' + k + '" />' +  qa[currentIndex].options[k] + '</label><br />';
 			}
 			
-			answers += '<button onclick="multichoice()">送出</button>';
+			answers += '<button onclick="multichoice()">答案</button>';
 			
 		  }
 		  
@@ -396,7 +369,10 @@
             var selected = $(this).val();
             if(selected == qa[currentIndex].answer) {
               $('#qa-result').html("你答對了！");
-            } else {
+            }else if( qa[currentIndex].answer ==='#' ){
+				$('#qa-result').html("本題一律給分！");
+			}
+			else {
               $('#qa-result').html("你答錯了！正確答案應該是 -> " + qa[currentIndex].options[qa[currentIndex].answer]  );
             }
           });
