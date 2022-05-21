@@ -232,6 +232,12 @@
 											
 												chC = line[i].slice(line[i].indexOf('')+1 , line[i].length );
 												chB = line[i].slice(1 , line[i].indexOf('') );
+												for ( let j=1;j<5;j++ ){	
+													if (  line[i+j].charAt(0)===''){
+														i= i+j;
+													break;
+													}		
+												}
 											}
 											else{
 												chB = line[i].slice(1, line[i].length);
@@ -244,7 +250,7 @@
 												chB += line[i+j];
 											}
 											
-											chC = line[i].slice(1, line[i].length);
+												chC = line[i].slice(1, line[i].length);
 												for ( let j=1;j<5;j++ ){	
 												//line[i+j]= line[i+j].replace(/\r/g, '');
 												if (  line[i+j].charAt(0)===''){
