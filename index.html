@@ -84,7 +84,7 @@
         var currentIndex = 0, qa = [], total = 0;
 		let menu ="";
         $(function() {
-		for (let yr=110;yr>99;yr--){
+		for (let yr=110;yr>102;yr--){
 			menu += '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' +
 					 yr+ '<span class="caret"></span></a>'+
 					'<ul class="dropdown-menu">'+
@@ -92,6 +92,20 @@
 					'<li><a href="#">'+yr+'綜合法學(二)(民法、民事訴訟法)</a></li>'+
 					'<li><a href="#">'+yr+'綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>'+
 					'<li><a href="#">'+yr+'綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li>'+
+					'</ul></li>';
+		}
+		for (let yr=102;yr>99;yr--){
+			menu += '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' +
+					 yr+ '<span class="caret"></span></a>'+
+					'<ul class="dropdown-menu">'+
+					'<li><a href="#">'+yr+'司-綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>'+
+					'<li><a href="#">'+yr+'律-綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>'+
+					'<li><a href="#">'+yr+'司-綜合法學(二)(民法、民事訴訟法)</a></li>'+
+					'<li><a href="#">'+yr+'律-綜合法學(二)(民法、民事訴訟法)</a></li>'+
+					'<li><a href="#">'+yr+'司-綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>'+
+					'<li><a href="#">'+yr+'律-綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>'+
+					'<li><a href="#">'+yr+'司-綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li>'+
+					'<li><a href="#">'+yr+'律-綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li>'+
 					'</ul></li>';
 		}
 		$(".navbar-nav").html(menu);
@@ -161,7 +175,7 @@
 							do {
 								chA="A."; chB="B."; chC="C."; chD="D."; chE="E.";
 								
-								if ( isNumeric(line[i].slice(0, 1)) ){
+								if (!isNaN(parseFloat(line[i].replace(/\r/g, '')[0]))){
 									if ( (//g).test(line[i+1]) ){ //choiceA.
 										
 										quiz = line[i];
@@ -179,21 +193,26 @@
 									}
 
 
-										if (( (//g).test(line[i]) )){ //choice4 in  line
+										if (( (//g).test(line[i]) )){ //choice D in  line
 											chD += line[i].slice( line[i].indexOf('')+1, line[i].length);
 											chC += line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
 											chB += line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
 											chA += line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											chE = "";
 											i++;
 										}
-										else if (( (//g).test(line[i]) )) { //choice2 in  line
+										else if (( (//g).test(line[i]) )) { //choice B in  line
 											chB += line[i].slice(line[i].indexOf('')+1 , line[i].length );
 											chA += line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
 											chD += line[i+1].slice( line[i+1].indexOf('')+1, line[i+1].length);
 											chC += line[i+1].slice(line[i+1].indexOf('')+1 , line[i+1].indexOf('') );
+											chE = "";
 											i=i+2;
 										}
 										else{
+														
+											
+												
 											chA += line[i].slice(1, line[i].length);
 											for ( let j=1;j<5;j++ ){
 												//line[i+j]= line[i+j].replace(/\r/g, '');
@@ -203,7 +222,7 @@
 												}		
 											chA += line[i+j];
 											}
-											if ((//g).test(line[i]) ) { //choice3 in  line
+											if ((//g).test(line[i]) ) { //choice C in  line
 											
 												chC += line[i].slice(line[i].indexOf('')+1 , line[i].length );
 												chB += line[i].slice(1 , line[i].indexOf('') );
@@ -235,7 +254,8 @@
 												chC += line[i+j];
 												}
 											}
-											
+								
+												
 											chD += line[i].slice(1, line[i].length);
 											for ( let j=1;j<3;j++ ){	
 												//line[i+j]= line[i+j].replace(/\r/g, '');
@@ -245,12 +265,16 @@
 													chE = "";
 													break;
 												}
-												if (  line[i+j].charAt(0)===''){
+												else if (  line[i+j].charAt(0)===''){
 													i= i+j;
 													chE += line[i].slice(1, line[i].length);
 													i++;
 													break;
-												}	
+												}
+												else{
+													chE="";
+												}
+												
 												chD += line[i+j];
 											}
 											//i++;
@@ -407,17 +431,9 @@
 				}
 				else{
 					$('#qa-result').html("你答對了！");
-				}
-			
-			
+				}		
           }
-		  
-		function isNumeric(str) {
-			if (typeof str != "string") return false // we only process strings!  
-				return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-			!isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
-		}
-		
+
         </script>
     </body>
 </html>
