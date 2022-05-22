@@ -128,8 +128,9 @@
             return false;
           });
           $('.qa-jump').click(function() {
-            currentIndex = window.prompt('輸入 1-' + total + ' 數字');
-            currentIndex = parseInt(currentIndex) - 1;
+            let inputIndex = parseInt( window.prompt('輸入 1-' + total + ' 數字') );
+			if (!isNaN(inputIndex))
+				currentIndex = inputIndex -1;
             showQuiz();
             return false;
           });
@@ -158,8 +159,10 @@
 							i=i+1;
 						
 							do {
+								chA="A."; chB="B."; chC="C."; chD="D."; chE="E.";
+								
 								if ( isNumeric(line[i].slice(0, 1)) ){
-									if ( (//g).test(line[i+1]) ){ //choice1 
+									if ( (//g).test(line[i+1]) ){ //choiceA.
 										
 										quiz = line[i];
 										i++;
@@ -177,21 +180,21 @@
 
 
 										if (( (//g).test(line[i]) )){ //choice4 in  line
-											chD = line[i].slice( line[i].indexOf('')+1, line[i].length);
-											chC = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
-											chB = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
-											chA = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											chD += line[i].slice( line[i].indexOf('')+1, line[i].length);
+											chC += line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											chB += line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											chA += line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
 											i++;
 										}
 										else if (( (//g).test(line[i]) )) { //choice2 in  line
-											chB = line[i].slice(line[i].indexOf('')+1 , line[i].length );
-											chA = line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
-											chD = line[i+1].slice( line[i+1].indexOf('')+1, line[i+1].length);
-											chC = line[i+1].slice(line[i+1].indexOf('')+1 , line[i+1].indexOf('') );
+											chB += line[i].slice(line[i].indexOf('')+1 , line[i].length );
+											chA += line[i].slice(line[i].indexOf('')+1 , line[i].indexOf('') );
+											chD += line[i+1].slice( line[i+1].indexOf('')+1, line[i+1].length);
+											chC += line[i+1].slice(line[i+1].indexOf('')+1 , line[i+1].indexOf('') );
 											i=i+2;
 										}
 										else{
-											chA = line[i].slice(1, line[i].length);
+											chA += line[i].slice(1, line[i].length);
 											for ( let j=1;j<5;j++ ){
 												//line[i+j]= line[i+j].replace(/\r/g, '');
 												if (  line[i+j].charAt(0)===''){
@@ -202,8 +205,8 @@
 											}
 											if ((//g).test(line[i]) ) { //choice3 in  line
 											
-												chC = line[i].slice(line[i].indexOf('')+1 , line[i].length );
-												chB = line[i].slice(1 , line[i].indexOf('') );
+												chC += line[i].slice(line[i].indexOf('')+1 , line[i].length );
+												chB += line[i].slice(1 , line[i].indexOf('') );
 												for ( let j=1;j<5;j++ ){	
 													if (  line[i+j].charAt(0)===''){
 														i= i+j;
@@ -212,7 +215,7 @@
 												}
 											}
 											else{
-												chB = line[i].slice(1, line[i].length);
+												chB += line[i].slice(1, line[i].length);
 												for ( let j=1;j<5;j++ ){
 													//line[i+j]= line[i+j].replace(/\r/g, '');
 													if ( line[i+j].charAt(0)==='' ){
@@ -222,7 +225,7 @@
 												chB += line[i+j];
 											}
 											
-												chC = line[i].slice(1, line[i].length);
+												chC += line[i].slice(1, line[i].length);
 												for ( let j=1;j<5;j++ ){	
 												//line[i+j]= line[i+j].replace(/\r/g, '');
 												if (  line[i+j].charAt(0)===''){
@@ -233,18 +236,18 @@
 												}
 											}
 											
-											chD = line[i].slice(1, line[i].length);
+											chD += line[i].slice(1, line[i].length);
 											for ( let j=1;j<3;j++ ){	
 												//line[i+j]= line[i+j].replace(/\r/g, '');
 												
-												if (  parseFloat(line[i+j].slice(0, 2))==(qa.length+2)){
+												if (  parseInt(line[i+j].slice(0, 2))==(qa.length+2)){
 													i= i+j;
 													chE = "";
 													break;
 												}
 												if (  line[i+j].charAt(0)===''){
 													i= i+j;
-													chE = line[i].slice(1, line[i].length);
+													chE += line[i].slice(1, line[i].length);
 													i++;
 													break;
 												}	
@@ -373,7 +376,7 @@
 				$('#qa-result').html("本題一律給分！");
 			}
 			else {
-              $('#qa-result').html("你答錯了！正確答案應該是 -> " + qa[currentIndex].options[qa[currentIndex].answer]  );
+              $('#qa-result').html("你答錯了！正確答案應該是 -> <br>" + qa[currentIndex].options[qa[currentIndex].answer]  );
             }
           });
 		  
@@ -397,7 +400,7 @@
 				if( JSON.stringify(userAns)!=JSON.stringify(qa[currentIndex].answer) ) {
 					let theAns="";
 					qa[currentIndex].answer.forEach(function(value){
-						theAns +=  "<br>*" + qa[currentIndex].options[value] ;
+						theAns +=  "<br>" + qa[currentIndex].options[value] ;
 					});
 					
 					$('#qa-result').html("你答錯了！正確答案應該是 -> " + theAns );
