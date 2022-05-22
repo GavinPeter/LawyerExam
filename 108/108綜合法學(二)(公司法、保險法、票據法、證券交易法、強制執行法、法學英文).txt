@@ -325,19 +325,15 @@
 Larry locks Kevin, who is an athlete, in a room which has two open windows at a height of 100 cm from the floor and the ground outside.
 Larry is a shop owner who knows his customer Jane is in his shop. But he locks the only door of the shop to prevent a third person from entering when he goes out for his lunch.
 59 When parties enter into a contract, they often wish to calculate the damages which would arise for one or both of the parties in the event that there is a breach of contract by the other party. Provisions in a contract stipulating the amount required to compensate an injured party in the event of a breach are referred to as   clauses.
-
 restitution damages
-general damages
-
 liquidated damages
+general damages
 expectation damages
 
 60 		 is a type of contract where party A enters into a valid contract with party B which stipulates that party B shall render performance for the benefit of party C.
-
 A delegation contract
-An assignment of contract
-
 A trust agreement
+An assignment of contract
 A third-party beneficiary contract
 
 61 John is the CEO and chairman of ABC Corp. He entered into an agreement to merge his company with XYZ Corp. In return, shareholders of ABC will receive XYZ shares as payment, which have a slightly higher market value. One of the following procedures is the least likely to apply in this scenario. Please identify it.
@@ -364,11 +360,9 @@ automatically, unless he has a conflict of interest that could result in a possi
 one person, one vote	partisan gerrymandering
 universal suffrage	voter intimidation
 65 Our opinions applying the doctrine known as " " hold that the Due Process Clause prohibits States from infringing fundamental liberty interests, unless the infringement is narrowly tailored to serve a compelling state interest.
-
 procedural due process
-due diligence
-
 substantial process
+due diligence
 substantive due process
 
 66 When a judicial decision cannot have any practical legal effect because the issues that generated it either have been resolved or disappeared, it is said that the case has become 	.
@@ -384,11 +378,9 @@ automatically, unless he has a conflict of interest that could result in a possi
 67 When a judge has a financial interest in the case assigned to him (or her), is related to a party, or there is a strong possibility that the judge’s decision will be biased, any party may request such a judge to   himself (or herself) from the case.
 excuse	recuse	accuse	deduce
 68 To make sure that a plaintiff with a valid cause of action will timely exercise his (or her) right, the law imposes time limits on a cause of action. If a plaintiff fails to file a complaint within the time limits, the defendant may plead such failure as a defense. Such time limits are called  .
-
 Temporal conditions
-Statute of countdowns
-
 Statute of limitations
+Statute of countdowns
 Durational conditions
 
 69 The ways to remove a director are multiple in Taiwan’s Company Act. Which of the following statements is incorrect?
@@ -398,11 +390,9 @@ director of her company.
 A majority of shareholders can resolve to elect a new board, which in reality removes all sitting directors.
 A majority of supervisors can convene a meeting and remove a director if all supervisors agree to it.
 70 If the identity or the character of the property being sold is overtly misrepresented by one of the contracting parties, then the other party’s assent is obviously less than meaningful and any agreement that results will be regarded as  .
-
 fraud in the inducement
-lack of legal capacity
-
 invalid
+lack of legal capacity
 voidable
 
 
