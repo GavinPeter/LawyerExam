@@ -21,7 +21,7 @@
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container-fluid">
         <div class="navbar-header">
-		<a class="navbar-brand" href="#">司律一試</a>
+		<a class="navbar-brand" href="#">司律一試[年]</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -31,18 +31,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-			  <!--li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">110
-				<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">110綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>
-					<li><a href="#">110綜合法學(二)(民法、民事訴訟法)</a></li>
-					<li><a href="#">110綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>
-					<li><a href="#">110綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li>
-				</ul>
-			  </li-->
+
           </ul>
-		  
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -56,7 +46,7 @@
                 <div id="qa-answer" class="col-md-12" style="font-size: 20pt;"></div>
                 <h1 id="qa-result" class="col-md-12" style="color: red;"></h1>
                 <div id="detail" class="col-md-12">
-                    <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div id="helper" class="col-md-8 col-sm-12 col-xs-12">
                         <div class="btn-group btn-group-justified">
                             <a class="btn btn-primary btn-lg qa-previous" href="#">
                                 上一題
@@ -74,8 +64,8 @@
                 </div>
             </div>
             <div style="text-align: center;">
-                <a href="https://github.com/lagendre/government_procurement_act" target="_blank">網站原始碼</a> |
-                資料來源：考選部考古題
+                <a href="https://github.com/lagendre/LayerExam" target="_blank">網站原始碼</a> |
+                資料來源： <a href="https://wwwq.moex.gov.tw/exam/wFrmExamQandASearch.aspx" target="_blank">考選部考畢試題查詢平臺</a>
             </div>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -102,8 +92,8 @@
 					'<li><a href="#">'+yr+'律-綜合法學(一)(憲法、行政法、國際公法、國際私法)</a></li>'+
 					'<li><a href="#">'+yr+'司-綜合法學(二)(民法、民事訴訟法)</a></li>'+
 					'<li><a href="#">'+yr+'律-綜合法學(二)(民法、民事訴訟法)</a></li>'+
-					'<li><a href="#">'+yr+'司-綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>'+
-					'<li><a href="#">'+yr+'律-綜合法學(二)(公司法、保險法、票據法、證券交易法、強制執行法、法學英文)</a></li>'+
+					'<li><a href="#">'+yr+'司-綜合法學(二)(公司法、保險法、票據法、海商法、證券交易法、法學英文)</a></li>'+
+					'<li><a href="#">'+yr+'律-綜合法學(二)(公司法、保險法、票據法、海商法、證券交易法、法學英文)</a></li>'+
 					'<li><a href="#">'+yr+'司-綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li>'+
 					'<li><a href="#">'+yr+'律-綜合法學(一)(刑法、刑事訴訟法、法律倫理)</a></li>'+
 					'</ul></li>';
@@ -115,11 +105,14 @@
 		//$("ul .dropdown-menu li:nth-child("+(Math.floor(Math.random() * $('.dropdown-menu li').length )+1)+")").addClass("active");
 			
 		//selectquiz( $("ul .dropdown-menu li").find(".active").text() );
+		$('#qa-quiz').html("請選擇年度及考試!!");
+		$("#helper").hide();
 		
 		$(".dropdown-menu a").on("click", function(){
 			
 			//$("ul .dropdown-menu li").find(".active").removeClass("active");
 			//$(this).addClass("active");
+			$("#helper").show();
 			
 			selectquiz( $(this).text() );
 		});
